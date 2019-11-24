@@ -46,29 +46,18 @@ bool checkParanthesis(string exp)
     int n = exp.length();
     
     for (int i=0; i<n; i++)
-    {
         if (exp[i] == '(')
-        {
             pushNode(exp[i]);
-        }
         else if (exp[i] == ')' )
         {
             if (first == nullptr)
-            {
-                return false;
-            }
-            
+                return false;            
             else
-            {
                 popNode();
-            }
         }
-    }
     
     if (first != nullptr)
-    {
         return false;
-    }
     
     return true;
 }
@@ -77,9 +66,8 @@ int main(int argc, const char * argv[])
 {
     string exp = "((9+9))";
     
-    if (!checkParanthesis(exp)) {
+    if (!checkParanthesis(exp)) 
         cout << "paranthesis does not match!" << endl;
-    }
     else
         cout << "paranthesis match!" << endl;
     
