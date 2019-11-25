@@ -68,14 +68,13 @@ Node* minValueNode(Node* temp)
 
 Node* remove(Node* root1, int x)
 {
-    if (root1 == NULL) return root;
+    if (root1 == NULL) 
+        return root;
     
     if (x < root1->data)
         root1->left = remove(root1->left, x);
-    
     else if (x > root1->data)
         root1->right = remove(root1->right, x);
-    
     else
     {
         if (root1->left == NULL)
@@ -92,11 +91,10 @@ Node* remove(Node* root1, int x)
         }
         
         Node* temp = minValueNode(root1->right);
-        
         root1->data = temp->data;
-        
         root1->right = remove(root1->right, temp->data);
     }
+    
     return root1;
 }
 
@@ -126,11 +124,11 @@ int main(int argc, const char * argv[])
     
     do {
         cout << "----------MENU----------" << endl
-            << "1 - enter a number" << endl
-            << "2 - delete a number" << endl
-            << "3 - display" << endl
-            << "4 - end program" << endl
-            << "Enter a choice: ";
+             << "1 - enter a number" << endl
+             << "2 - delete a number" << endl
+             << "3 - display" << endl
+             << "4 - end program" << endl
+             << "Enter a choice: ";
         cin  >> choice;
         
         switch (choice) {
