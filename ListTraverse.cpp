@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  Question5
+//  Linked List Traversing
 //
 //  Created by afieqha mieza azemi on 25/10/2019.
 //  Copyright © 2019 afieqha mieza azemi. All rights reserved.
