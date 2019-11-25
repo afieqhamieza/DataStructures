@@ -20,17 +20,14 @@ void pushNode(char data_in)
 
 void popNode()
 {
-    if (top == nullptr) {
-        cout << "the stack is empty" << endl;
-    }
-    
+    if (top == nullptr) 
+        cout << "the stack is empty" << endl;    
     else
     {
         Stack* temp = top;
         top = temp->next;
         delete temp;
-    }
-    
+    }   
 }
 
 int priority(char x)
@@ -54,11 +51,9 @@ void infixToPostfix(string s)
     for(int i = 0; i < length; i++)
     {
         if(s[i] >= 'a' && s[i] <= 'z')
-            output += s[i];
-        
+            output += s[i]; 
         else if(s[i] == '(')
             pushNode('(');
-        
         else if(s[i] == ')')
         {
             while(top->data != 'N' && top->data != '(')
@@ -71,7 +66,6 @@ void infixToPostfix(string s)
             if(top->data == '(')
                 popNode();
         }
-        
         else
         {
             while(top->data != 'N' && priority(s[i]) <= priority(top->data))
@@ -99,7 +93,7 @@ int main (void)
 {
     string s;
     cout << "Enter an equation (small letters only): ";
-    cin >> s;
+    cin  >> s;
 
     infixToPostfix(s);
     
