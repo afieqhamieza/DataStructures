@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  Question1
+//  Grading Scale
 //
 //  Created by afieqha mieza azemi on 26/10/2019.
 //  Copyright © 2019 afieqha mieza azemi. All rights reserved.
