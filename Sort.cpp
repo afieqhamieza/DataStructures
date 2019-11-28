@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  bubble sort, selection sort, heap sort
+//  finalCode
 //
 //  Created by afieqha mieza azemi on 27/11/2019.
 //  Copyright © 2019 afieqha mieza azemi. All rights reserved.
@@ -13,31 +13,46 @@ using namespace std;
 
 void writeToFile(string pathname, int arr[], int size);
 void readFromFile(string pathname, int arr[], int size);
-void bubble(int arr[], int size);
-void selection(int arr[], int size);
-void display(int arr[], int size);
-void heap(int arr[], int n);
+void bubble(int arr[], int size, int& count);
+void selection(int arr[], int size, int& count);
+void heap(int arr[], int n, int& count);
 void heapup(int arr[], int size, int i);
+void display(int arr[], int size);
 
 int main(int argc, const char * argv[])
 {
-    int size = 5;
+    int size = 50000;
     int ori[size], bubbleArr[size], selectArr[size], heapArr[size];
+    int bubbleCount, selectCount, heapCount;
     
     for (int i=0; i<size; i++)
-        ori[i] = rand() % 6;
+        ori[i] = rand() % 1001;
     
     writeToFile("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/data.txt", ori, size);
-    readFromFile("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/data.txt", bubbleArr, size);
     
-    bubble(bubbleArr, size);
+    readFromFile("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/data.txt", bubbleArr, size);
+    bubble(bubbleArr, size, bubbleCount);
     writeToFile("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/bubble.txt", bubbleArr, size);
     
-    selection(selectArr, size);
+    readFromFile("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/data.txt", selectArr, size);
+    selection(selectArr, size, selectCount);
     writeToFile("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/selection.txt", selectArr, size);
     
-    heap(heapArr, size);
+    readFromFile("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/data.txt", heapArr, size);
+    heap(heapArr, size, heapCount);
     writeToFile("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/heap.txt", heapArr, size);
+    
+    ofstream outfile;
+    
+    outfile.open("/Users/afieqhamiezaazemi/Documents/Fall 2019/Data Structures/Assignment 4/comparison.txt");
+    
+    if (outfile.is_open())
+    {
+        outfile << "bubble" << "\t\tselection" << "\theap" << endl;
+        outfile << bubbleCount << "\t" << selectCount << "\t" << heapCount << endl;
+        
+        outfile.close();
+    }
     
     return 0;
 }
@@ -72,34 +87,50 @@ void readFromFile(string pathname, int arr[], int size)
     }
 }
 
-void bubble(int arr[], int size)
-{
-    for (int i=0; i<size-1; i++)
-        for (int j=0; j<size-i-1; j++)
-            if (arr[j] > arr[j+1])
-                swap(arr[j], arr[j+1]);
-}
-
-void selection(int arr[], int size)
+void bubble(int arr[], int size, int& count)
 {
     for (int i=0; i<size-1; i++)
     {
+        count++;
+        for (int j=0; j<size-i-1; j++)
+        {
+            count++;
+            
+            if (arr[j] > arr[j+1])
+                swap(arr[j], arr[j+1]);
+        }
+    }
+}
+
+void selection(int arr[], int size, int& count)
+{
+    for (int i=0; i<size-1; i++)
+    {
+        count++;
         int min_idx = i;
+        
         for (int j=i+1; j<size; j++)
+        {
+            count++;
             if (arr[j] < arr[min_idx])
                 min_idx = j;
+        }
         
         swap(arr[min_idx], arr[i]);
     }
 }
 
-void heap(int arr[], int size)
+void heap(int arr[], int size, int& count)
 {
     for (int i=size/2-1; i>=0; i--)
+    {
+        count++;
         heapup(arr, size, i);
+    }
     
     for (int i=size-1; i>=0; i--)
     {
+        count++;
         swap(arr[0], arr[i]);
         
         heapup(arr, i, 0);
